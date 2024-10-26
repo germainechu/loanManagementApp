@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LoanStatus {
+  PENDING
+  ACTIVE
+  PAID
+  DEFAULTED
+}
+
+enum PaymentStatus {
+  SCHEDULED
+  PAID
+  MISSED
+}
+
+enum Currency {
+  USD
+  EUR
+  GBP
+  CAD
+  AUD
+  JPY
+  NZD
+}
+
+model Loan {
+  id           String      @id @default(cuid())
+  borrowerName String
+  amount       Float
+  interestRate Float
+  currency     Currency   @default(USD)
+  term         Int        // in months
+  status       LoanStatus @default(PENDING)
+  startDate    DateTime
+  endDate      DateTime?  // Optional as it might not be set for pending loans
+  payments     Payment[]  // This creates a relation to Payment model
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  loan        Loan          @relation(fields: [loanId], references: [id])
+  loanId      String
+  currency    Currency
+  amount      Float
+  dueDate     DateTime
+  status      PaymentStatus @default(SCHEDULED)
+  paidDate    DateTime?     // Optional as it's only set when payment is made
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([loanId])
+}
