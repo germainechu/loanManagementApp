@@ -5,14 +5,7 @@ import prisma from '@/lib/prisma'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, Eye, Pencil, Trash2 } from 'lucide-react'
-import { DeleteLoanItem } from '@/components/loans/delete-loan-client'
+import { LoanActions } from '@/components/loans/loan-actions'
 
 const CURRENCY_SYMBOLS = {
   USD: '$',
@@ -55,28 +48,7 @@ export default async function LoansPage() {
             <Card key={loan.id} className="relative">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-lg font-bold">{loan.borrowerName}</CardTitle>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <Link href={`/loans/${loan.id}`}>
-                      <DropdownMenuItem>
-                        <Eye className="mr-2 h-4 w-4" />
-                        View Details
-                      </DropdownMenuItem>
-                    </Link>
-                    <Link href={`/loans/${loan.id}/edit`}>
-                      <DropdownMenuItem>
-                        <Pencil className="mr-2 h-4 w-4" />
-                        Edit
-                      </DropdownMenuItem>
-                    </Link>
-                    <DeleteLoanItem loanId={loan.id} />
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <LoanActions loanId={loan.id} />
               </CardHeader>
               <CardContent>
                 <dl className="space-y-2">

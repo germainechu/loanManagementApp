@@ -27,7 +27,7 @@ export function DeleteLoan({ loanId, onDeleteSuccess }: DeleteLoanProps) {
   async function deleteLoan() {
     setIsDeleting(true)
     try {
-      const response = await fetch(`/loans/${loanId}`, {
+      const response = await fetch(`/api/loans/${loanId}`, {
         method: 'DELETE',
       })
 
