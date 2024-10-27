@@ -22,7 +22,7 @@ export function LoanActions({ loanId }: { loanId: string }) {
           <Eye className="mr-2 h-4 w-4" />
           View Details
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push(`/loans/${loanId}/edit`)}>
           <Pencil className="mr-2 h-4 w-4" />
           Edit
         </DropdownMenuItem>
