@@ -15,23 +15,16 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import prisma from "@/lib/prisma"
-import { Prisma } from "@prisma/client"
+import { CURRENCY_SYMBOLS } from "@/lib/currencySymbols";
 
 // Define the type to match our Prisma Currency enum
 type Currency = 'USD' | 'EUR' | 'GBP' | 'CAD' | 'AUD' | 'JPY' | 'NZD'
 
-
-const CURRENCY_SYMBOLS = {
-  USD: '$',
-  EUR: '€',
-  GBP: '£',
-  CAD: 'C$',
-  AUD: 'A$',
-  JPY: '¥',
-  NZD: 'NZ$'
-} as const
-
-export default function NewLoanPage() {
+/**
+ * Creates a new loan in the database.
+ * @param {FormData} formData - The form data containing new loan details.
+ */
+export default function CreateLoanPage() {
   async function createLoan(formData: FormData) {
     "use server"
     

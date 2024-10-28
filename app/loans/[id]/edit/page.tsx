@@ -13,17 +13,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import prisma from "@/lib/prisma"
+import { CURRENCY_SYMBOLS } from "@/lib/currencySymbols";
 
-const CURRENCY_SYMBOLS = {
-  USD: '$',
-  EUR: '€',
-  GBP: '£',
-  CAD: 'C$',
-  AUD: 'A$',
-  JPY: '¥',
-  NZD: 'NZ$'
-} as const
-
+/**
+ * Updates the loan details in the database.
+ * @param {FormData} formData - The form data containing updated loan details.
+ */
 export default async function EditLoanPage({ params }: { params: { id: string } }) {
   try {
     // Ensure params is resolved

@@ -6,16 +6,8 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
+import { CURRENCY_SYMBOLS } from "@/lib/currencySymbols";
 
-const CURRENCY_SYMBOLS = {
-  USD: '$',
-  EUR: '€',
-  GBP: '£',
-  CAD: 'C$',
-  AUD: 'A$',
-  JPY: '¥',
-  NZD: 'NZ$'
-} as const
 
 export default async function LoanPage({ params }: { params: { id: string } }) {
   try {
