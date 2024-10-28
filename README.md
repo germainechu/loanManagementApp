@@ -79,3 +79,6 @@ If I had more time, I would:
 - Implement the payment system
 - Add user authentication
 - Make a dashboard with loan analytics
+
+## Demo
+
